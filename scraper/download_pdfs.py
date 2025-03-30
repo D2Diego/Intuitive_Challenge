@@ -4,9 +4,6 @@ from urllib.parse import urljoin
 import os
 
 def download_pdf(url, filename):
-    """
-    Função para fazer download do arquivo PDF
-    """
     response = requests.get(url)
     if response.status_code == 200:
         with open(filename, 'wb') as f:
@@ -18,19 +15,15 @@ def download_pdf(url, filename):
         return False
 
 def main():
-    # URL do site
     url = "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos"
     
-    # Criar pasta para salvar os PDFs
     if not os.path.exists('scraper/downloads/pdfs'):
         os.makedirs('scraper/downloads/pdfs')
     
-    # Fazer requisição ao site
     response = requests.get(url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # Procurar links dos PDFs
         pdf_files = []
         for link in soup.find_all('a'):
             href = link.get('href', '')

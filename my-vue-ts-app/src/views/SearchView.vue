@@ -30,17 +30,21 @@ export default defineComponent({
   components: { SearchResults },
   setup() {
     const query = ref<string>("");
-    const results = ref<Array<{ id: number; name: string }>>([]);
+    const results = ref<
+      Array<{ id: number; nome_fantasia: string; razao_social: string }>
+    >([]);
     const currentPage = ref<number>(1);
     const hasMoreResults = ref<boolean>(true);
 
     const fetchResults = async () => {
       try {
         const response = await axios.get(
-          `https://api.example.com/search?query=${query.value}&page=${currentPage.value}`
+          `http://localhost:5000/api/operadoras/search?q=${query.value}&page=${currentPage.value}`
         );
         results.value = response.data.results;
-        hasMoreResults.value = response.data.hasMore;
+        hasMoreResults.value =
+          response.data.pagination.current_page <
+          response.data.pagination.total_pages;
       } catch (error) {
         console.error("Erro ao buscar resultados:", error);
         results.value = [];

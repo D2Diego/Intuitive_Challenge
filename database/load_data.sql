@@ -2,7 +2,7 @@
 \c db_intuitive_care
 
 -- Carrega dados do arquivo de operadoras
-\copy cadastro_operadoras (Registro_ANS, CNPJ, Razao_Social, Nome_Fantasia, Modalidade, Logradouro, Numero, Complemento, Bairro, Cidade, UF, CEP, DDD, Telefone, Fax, Endereco_eletronico, Representante, Cargo_Representante, Regiao_de_Comercializacao, Data_Registro_ANS) FROM '/home/d2dods/Documentos/Desafios/Teste/resultados/operadoras_ativas.csv' WITH (FORMAT csv, DELIMITER ';', HEADER true, ENCODING 'LATIN1');
+\copy operator_registration (Registro_ANS, CNPJ, Razao_Social, Nome_Fantasia, Modalidade, Logradouro, Numero, Complemento, Bairro, Cidade, UF, CEP, DDD, Telefone, Fax, Endereco_eletronico, Representante, Cargo_Representante, Regiao_de_Comercializacao, Data_Registro_ANS) FROM '/home/d2dods/Documentos/Challenge/Intuitive_Challenge/database/resultados/operadoras_ativas.csv' WITH (FORMAT csv, DELIMITER ';', HEADER true, ENCODING 'LATIN1');
 
 -- Criar tabela temporária para carregar os dados brutos
 CREATE TEMP TABLE temp_quarterly_balance (
@@ -15,7 +15,7 @@ CREATE TEMP TABLE temp_quarterly_balance (
 );
 
 -- Carrega dados para a tabela temporária
-\copy temp_quarterly_balance FROM '/home/d2dods/Documentos/Desafios/Teste/resultados/demonstracoes_contabeis_combinadas.csv' WITH (FORMAT csv, DELIMITER ';', HEADER true, ENCODING 'LATIN1');
+\copy temp_quarterly_balance FROM '/home/d2dods/Documentos/Challenge/Intuitive_Challenge/database/resultados/demonstracoes_contabeis_combinadas.csv' WITH (FORMAT csv, DELIMITER ';', HEADER true, ENCODING 'LATIN1');
 
 -- Insere os dados na tabela final convertendo as vírgulas para pontos
 INSERT INTO quarterly_balance (data, reg_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)

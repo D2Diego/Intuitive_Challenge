@@ -3,14 +3,8 @@ import pandas as pd
 import os
 
 def extract_tables_from_pdf(pdf_path):
-    """
-    Extrai todas as tabelas do PDF usando tabula
-    """
     print("Extraindo tabelas do PDF...")
     try:
-        # Extrai todas as tabelas de todas as páginas
-        # lattice=True para tabelas com linhas visíveis
-        # pages='all' para todas as páginas
         tables = tabula.read_pdf(
             pdf_path,
             pages='all',
@@ -24,7 +18,6 @@ def extract_tables_from_pdf(pdf_path):
         return None
 
 def main():
-    # Procura o PDF do Anexo I com o nome correto
     pdf_path = "scraper/downloads/pdfs/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
     
     if not os.path.exists(pdf_path):
@@ -33,15 +26,12 @@ def main():
         return None
     
     try:
-        # Cria o diretório temp se não existir
         temp_dir = 'transformer/temp'
         if not os.path.exists(temp_dir):
             os.makedirs(temp_dir)
             
-        # Extrai as tabelas
         tables = extract_tables_from_pdf(pdf_path)
         if tables:
-            # Salva as tabelas para processamento posterior
             pd.to_pickle(tables, f'{temp_dir}/raw_tables.pkl')
             print("Tabelas extraídas e salvas com sucesso!")
             return True
@@ -55,4 +45,4 @@ def main():
     return False
 
 if __name__ == "__main__":
-    main() 
+    main()

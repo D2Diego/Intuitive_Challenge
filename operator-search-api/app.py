@@ -2,16 +2,21 @@ from flask import Flask, jsonify, request
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from flask_cors import CORS
+from dotenv import load_dotenv
+import os
+
+# Carrega as variáveis de ambiente do arquivo .env
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Habilita CORS para todas as rotas
 
 def get_db_connection():
     return psycopg2.connect(
-        host="localhost",
-        database="db_intuitive_care",
-        user="d2dev",
-        password="123456"
+        host=os.getenv('DB_HOST'),
+        database=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD')
     )
 
 @app.route('/api/operadoras/search')

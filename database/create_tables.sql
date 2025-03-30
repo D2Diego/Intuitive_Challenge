@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS quarterly_balance (
 );
 
 -- Criação da tabela cadastro_operadoras
-CREATE TABLE IF NOT EXISTS cadastro_operadoras (
+CREATE TABLE IF NOT EXISTS operator_registration (
     id SERIAL PRIMARY KEY,
     Registro_ANS INT,
     CNPJ BIGINT,

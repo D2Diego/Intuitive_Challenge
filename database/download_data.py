@@ -86,8 +86,8 @@ def download_demonstracoes_contabeis(anos):
         # Combina todos os DataFrames
         final_df = pd.concat(all_data, ignore_index=True)
         
-        # Cria diretório para o resultado
-        output_dir = "resultados"
+        # Define o novo diretório para o resultado
+        output_dir = "database/resultados"  # Caminho relativo
         create_directory(output_dir)
         
         # Salva o DataFrame combinado
@@ -105,8 +105,8 @@ def download_operadoras_ativas():
     try:
         content = download_file(url)
         if content:
-            # Cria diretório para o resultado
-            output_dir = "resultados"
+            # Define o novo diretório para o resultado
+            output_dir = "database/resultados"  # Caminho relativo
             create_directory(output_dir)
             
             # Salva o arquivo

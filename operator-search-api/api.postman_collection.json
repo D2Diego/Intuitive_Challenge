@@ -1,0 +1,41 @@
+{
+    "info": {
+      "name": "Operadora Search API",
+      "description": "Coleção para testar a API de busca de operadoras de saúde",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "http://localhost:5000",
+        "type": "string"
+      }
+    ],
+    "item": [
+      {
+        "name": "Buscar Operadoras",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{base_url}}/api/operadoras/search?q=UNIMED&page=1",
+            "host": ["{{base_url}}"],
+            "path": ["api", "operadoras", "search"],
+            "query": [
+              {
+                "key": "q",
+                "value": "UNIMED",
+                "description": "Termo de busca"
+              },
+              {
+                "key": "page",
+                "value": "1",
+                "description": "Número da página"
+              }
+            ]
+          },
+          "description": "Busca operadoras de saúde com paginação"
+        }
+      }
+    ]
+  }
