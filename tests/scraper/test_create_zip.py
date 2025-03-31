@@ -12,10 +12,8 @@ def test_create_zip():
         
         create_zip('pdf_dir', 'test.zip')
         
-        # Verifica se o ZipFile foi criado
         mock_zipfile.assert_called_once_with('test.zip', 'w')
         
-        # Verifica se os arquivos foram adicionados ao ZIP
         mock_zip = mock_zipfile.return_value.__enter__.return_value
         assert mock_zip.write.call_count == 2
 
@@ -29,7 +27,6 @@ def test_main_with_pdfs():
         
         main()
         
-        # Verifica se create_zip foi chamado
         mock_create_zip.assert_called_once()
 
 def test_main_no_pdfs():
@@ -38,12 +35,11 @@ def test_main_no_pdfs():
          patch('os.makedirs'):
         
         main()
-        # Não deve chamar create_zip quando não há PDFs 
 
 def test_main_directory_not_found():
     with patch('os.path.exists', return_value=False), \
          patch('os.makedirs'):
-        main()  # Deve printar mensagem de diretório não encontrado
+        main()
 
 def test_create_zip_with_mixed_files():
     mock_files = ['test1.pdf', 'test2.txt', 'test3.PDF']
@@ -54,6 +50,5 @@ def test_create_zip_with_mixed_files():
         
         create_zip('pdf_dir', 'test.zip')
         
-        # Verifica se apenas arquivos PDF foram adicionados
         mock_zip = mock_zipfile.return_value.__enter__.return_value
-        assert mock_zip.write.call_count == 2  # apenas test1.pdf e test3.PDF 
+        assert mock_zip.write.call_count == 2 

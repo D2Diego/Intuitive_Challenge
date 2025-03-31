@@ -32,7 +32,7 @@ def test_process_tables_error():
 
 def test_main_file_not_found():
     with patch('os.path.exists', return_value=False):
-        main()  # Should print error message
+        main()
 
 def test_main_success():
     with patch('os.path.exists', return_value=True), \

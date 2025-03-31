@@ -27,20 +27,20 @@ Pasta: `/operator-search-api/`
 Pasta: `/my-vue-ts-app/`
 - Interface web para consulta de operadoras
 
-# Healthcare Provider Search System
+# Sistema de Busca de Prestadores de Saúde
 
-A system to search for healthcare providers in Brazil using data from ANS (Agência Nacional de Saúde Suplementar).
+Um sistema para busca de prestadores de saúde no Brasil utilizando dados da ANS (Agência Nacional de Saúde Suplementar).
 
-## Prerequisites
+## Pré-requisitos
 
 - Python 3.8+
 - Node.js 14+
 - PostgreSQL
-- Java Runtime Environment (JRE)
+- Ambiente de Execução Java (JRE)
 
-## Backend Setup
+## Configuração do Backend
 
-1. Create a virtual environment and activate it:
+1. Crie um ambiente virtual e ative:
 
 ```bash
 python -m venv venv
@@ -48,44 +48,52 @@ source venv/bin/activate # Linux/Mac
 venv\Scripts\activate # Windows
 ```
 
-2. Install Python dependencies:
+2. Instale as dependências do Python:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Create a `.env` file in the `operator-search-api` directory with your database credentials:
+3. Crie um arquivo `.env` no diretório `operator-search-api` com as credenciais do banco de dados:
 
 ```
 DB_HOST=localhost
 DB_NAME=db_intuitive_care
-DB_USER=your_user
-DB_PASSWORD=your_password
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
 ```
 
-4. Run the backend server:
+4. Execute o servidor backend:
 
 ```bash
 cd operator-search-api
 python run.py
 ```
 
-The API will be available at `http://localhost:5000`
+A API estará disponível em `http://localhost:5000`
 
-## Frontend Setup
+## Configuração do Frontend
 
-1. Install Node.js dependencies:
+1. Instale as dependências do Node.js:
 
 ```bash
 cd my-vue-ts-app
 yarn install
 ```
 
-2. Run the development server:
+2. Execute o servidor de desenvolvimento:
 
 ```bash
 yarn serve
 ```
 
-The application will be available at `http://localhost:8080`
+A aplicação estará disponível em `http://localhost:8080`
+
+## Executando os Testes
+
+Para executar os testes, basta rodar o seguinte comando na raiz do projeto:
+
+```bash
+pytest
+```
 

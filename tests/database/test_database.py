@@ -5,14 +5,12 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 @pytest.fixture(scope="session")
 def test_db():
-    # Configurações do banco de teste usando variáveis de ambiente ou valores padrão
     dbname = "test_db_intuitive_care"
     user = os.getenv('POSTGRES_USER', 'postgres')
-    password = os.getenv('POSTGRES_PASSWORD', 'postgres')  # Altere para sua senha real
+    password = os.getenv('POSTGRES_PASSWORD', 'postgres')
     host = os.getenv('POSTGRES_HOST', 'localhost')
     
     try:
-        # Cria banco de teste
         conn = psycopg2.connect(
             dbname="postgres",
             user=user,
@@ -22,13 +20,11 @@ def test_db():
         conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         cur = conn.cursor()
         
-        # Dropa o banco se existir e cria novo
         cur.execute(f"DROP DATABASE IF EXISTS {dbname}")
         cur.execute(f"CREATE DATABASE {dbname}")
         
         conn.close()
         
-        # Conecta ao banco de teste
         test_conn = psycopg2.connect(
             dbname=dbname,
             user=user,
@@ -38,7 +34,6 @@ def test_db():
         
         yield test_conn
         
-        # Cleanup
         test_conn.close()
         
         conn = psycopg2.connect(
@@ -58,11 +53,9 @@ def test_db():
 def test_create_tables(test_db):
     cur = test_db.cursor()
     
-    # Executa o script de criação
     with open('database/create_tables.sql', 'r') as f:
         cur.execute(f.read())
     
-    # Verifica se as tabelas foram criadas
     cur.execute("""
         SELECT table_name 
         FROM information_schema.tables 
@@ -76,15 +69,12 @@ def test_create_tables(test_db):
 def test_load_data(test_db):
     cur = test_db.cursor()
     
-    # Primeiro cria as tabelas
     with open('database/create_tables.sql', 'r') as f:
         cur.execute(f.read())
     
-    # Depois carrega os dados
     with open('database/load_data.sql', 'r') as f:
         cur.execute(f.read())
     
-    # Verifica se há dados nas tabelas
     cur.execute("SELECT COUNT(*) FROM operator_registration")
     assert cur.fetchone()[0] > 0
     

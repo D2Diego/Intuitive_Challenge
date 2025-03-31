@@ -38,25 +38,20 @@ def test_download_file_failure():
         assert content is None
 
 def test_process_zip_content():
-    # Cria um DataFrame de teste
     test_df = pd.DataFrame({'col1': [1, 2], 'col2': ['a', 'b']})
     
-    # Cria um arquivo CSV em memória
     csv_buffer = io.StringIO()
     test_df.to_csv(csv_buffer, index=False, encoding='utf-8', sep=';')
     csv_content = csv_buffer.getvalue().encode('utf-8')
     
-    # Cria um arquivo ZIP em memória
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
         zip_file.writestr('test.csv', csv_content)
     
-    # Testa o processamento
     result_df = process_zip_content(zip_buffer.getvalue())
     pd.testing.assert_frame_equal(result_df, test_df)
 
 def test_process_zip_content_no_csv():
-    # Cria um ZIP sem arquivos CSV
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
         zip_file.writestr('test.txt', b'test content')
@@ -69,7 +64,6 @@ def test_process_zip_content_no_csv():
 @patch('requests.get')
 @patch('os.makedirs')
 def test_download_demonstracoes_contabeis(mock_makedirs, mock_get, mock_process, mock_download):
-    # Mock da resposta HTML
     mock_response = Mock()
     mock_response.text = '''
         <html>
@@ -80,7 +74,6 @@ def test_download_demonstracoes_contabeis(mock_makedirs, mock_get, mock_process,
     mock_response.raise_for_status = Mock()
     mock_get.return_value = mock_response
     
-    # Mock do processamento
     mock_df = pd.DataFrame({'col1': [1]})
     mock_process.return_value = mock_df
     mock_download.return_value = b'zip content'
