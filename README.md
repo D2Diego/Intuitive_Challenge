@@ -24,7 +24,7 @@ Pasta: `/operator-search-api/`
 - Implementação da API REST para busca de operadoras
 
 ### Frontend (Vue.js/TypeScript)
-Pasta: `/my-vue-ts-app/`
+Pasta: `/operator-search-front/`
 - Interface web para consulta de operadoras
 
 # Sistema de Busca de Prestadores de Saúde
@@ -77,7 +77,7 @@ A API estará disponível em `http://localhost:5000`
 1. Instale as dependências do Node.js:
 
 ```bash
-cd my-vue-ts-app
+cd operator-search-front
 yarn install
 ```
 

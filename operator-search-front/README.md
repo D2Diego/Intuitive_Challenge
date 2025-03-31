@@ -1,4 +1,4 @@
-# my-vue-ts-app
+# operator-search-front
 
 ## Project setup
 ```
